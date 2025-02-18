@@ -14,6 +14,15 @@ pnpm dev
 bun dev
 ```
 
+https://www.svgrepo.com/
+Calendar : https://mui.com/x/react-date-pickers/date-calendar/#day-view-customization
+shadcn/ui multi select input : https://shadcnui-expansions.typeart.cc/docs/multiple-selector
+heatmap : https://github.com/kevinsqi/react-calendar-heatmap
+
+#1
+Got the issue : Shadcn dropdown menu with multiple options edit and delete dialog (modal), the page gets freeze and adding pointer-events: none into the body tag after closing the dialog box.
+resolve by : https://github.com/shadcn-ui/ui/issues/1859 - post by cardoso-sj
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
