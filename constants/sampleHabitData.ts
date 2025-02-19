@@ -1,4 +1,6 @@
-export const sampleHabitData = [
+import { HabitType } from "@/types/GlobalTypes";
+
+export const sampleHabitData: HabitType[] = [
   {
     _id: "0aa1f2a5-04cf-43b2-aa0f-a11112534dd7",
     name: "Drink 3 Litres of water Daily",
