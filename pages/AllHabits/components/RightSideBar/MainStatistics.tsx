@@ -2,7 +2,7 @@
 
 import { HabitType } from "@/types/GlobalTypes";
 import { calculateStreak, getCurrentDayName } from "@/utils/DateFunctions";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Pie, Cell, PieChart, Label } from "recharts";
 import { useGlobalContextProvider } from "@/types/contextApi";
 
@@ -48,6 +48,48 @@ function calculateTotalPerfectDays(habit: HabitType[]) {
   return perfectDaysCount;
 }
 
+const calculateThePercentageOfTodaysProgress = (
+  allHabits: HabitType[],
+  selectedCurrentDate: string
+) => {
+  if (allHabits.length === 0 || !selectedCurrentDate) {
+    return 0;
+  }
+
+  let totalHabitsOfCompletedDays = 0;
+  let totalAllHabitsOfCurrentDay = 0;
+
+  if (allHabits) {
+    const completedHabitsOfCurrentDate = allHabits.filter((habit) => {
+      return habit.completedDays.some(
+        (day) => day.date === selectedCurrentDate
+      );
+    });
+
+    totalHabitsOfCompletedDays = completedHabitsOfCurrentDate.length;
+    const getTwoLettersOfCurrentDay = getCurrentDayName(
+      selectedCurrentDate
+    ).slice(0, 2);
+
+    const allHabitsOfCurrentDay = allHabits.filter((habit) => {
+      return habit.frequency.days.some(
+        (day) => day === getTwoLettersOfCurrentDay
+      );
+    });
+    totalAllHabitsOfCurrentDay = allHabitsOfCurrentDay.length;
+
+    const result = Math.round(
+      (totalHabitsOfCompletedDays / totalAllHabitsOfCurrentDay) * 100
+    );
+
+    if (result === undefined || isNaN(result)) {
+      return 0;
+    }
+    return result;
+  }
+  return 0;
+};
+
 const MainStatistics = () => {
   const [progress, setProgress] = useState<number>(0);
   const [statisticsInfo, setStatisticsInfo] = useState<statsInfo[]>([
@@ -55,72 +97,31 @@ const MainStatistics = () => {
     { id: 2, num: 10, subTitle: "Total Perfect Days" },
   ]);
 
-  // const statisticsInfo = [
-  //   { id: 1, num: 7, subTitle: "Total Best Streaks" },
-  //   { id: 2, num: 10, subTitle: "Total Perfect Days" },
-  // ];
-
   const {
     allHabitsObject: { allHabits },
     selectedCurrentDateObject: { selectedCurrentDate },
   } = useGlobalContextProvider();
 
-  const calculateThePercentageOfTodaysProgress = useCallback(
-    (allHabits: HabitType[]) => {
-      if (allHabits.length === 0 || !selectedCurrentDate) {
-        return 0;
-      }
-
-      let totalHabitsOfCompletedDays = 0;
-      let totalAllHabitsOfCurrentDay = 0;
-
-      if (allHabits) {
-        const completedHabitsOfCurrentDate = allHabits.filter((habit) => {
-          return habit.completedDays.some(
-            (day) => day.date === selectedCurrentDate
-          );
-        });
-
-        totalHabitsOfCompletedDays = completedHabitsOfCurrentDate.length;
-        const getTwoLettersOfCurrentDay = getCurrentDayName(
-          selectedCurrentDate
-        ).slice(0, 2);
-
-        const allHabitsOfCurrentDay = allHabits.filter((habit) => {
-          return habit.frequency.days.some(
-            (day) => day === getTwoLettersOfCurrentDay
-          );
-        });
-        totalAllHabitsOfCurrentDay = allHabitsOfCurrentDay.length;
-
-        const result = Math.round(
-          (totalHabitsOfCompletedDays / totalAllHabitsOfCurrentDay) * 100
-        );
-
-        if (result === undefined || isNaN(result)) {
-          return 0;
-        }
-        return result;
-      }
-      return 0;
-    },
-    []
-  );
-
   useEffect(() => {
-    setProgress(calculateThePercentageOfTodaysProgress(allHabits));
+    setProgress(
+      calculateThePercentageOfTodaysProgress(allHabits, selectedCurrentDate)
+    );
   }, [selectedCurrentDate, allHabits, calculateThePercentageOfTodaysProgress]);
 
+  const previousAllHabits = useRef(allHabits);
   useEffect(() => {
-    const streaks = allHabits.map((habit) => calculateStreak(habit));
-    const totalStreak = streaks.reduce((a, b) => a + b, 0);
+    if (previousAllHabits.current !== allHabits) {
+      const streaks = allHabits.map((habit) => calculateStreak(habit));
+      const totalStreak = streaks.reduce((a, b) => a + b, 0);
 
-    const perfectDays = calculateTotalPerfectDays(allHabits);
-    const copyStatsInfo = [...statisticsInfo];
-    copyStatsInfo[0].num = totalStreak;
-    copyStatsInfo[1].num = perfectDays;
-    setStatisticsInfo(copyStatsInfo);
-  }, []);
+      const perfectDays = calculateTotalPerfectDays(allHabits);
+      const copyStatsInfo = [...statisticsInfo];
+      copyStatsInfo[0].num = totalStreak;
+      copyStatsInfo[1].num = perfectDays;
+      setStatisticsInfo(copyStatsInfo);
+      previousAllHabits.current = allHabits;
+    }
+  }, [allHabits, statisticsInfo]);
 
   return (
     <div className="flex mx-4 flex-col gap-6 justify-center items-center mt-14 bg-slate-50 dark:bg-slate-800 text-primary dark:text-white rounded-xl  p-5 pt-7">

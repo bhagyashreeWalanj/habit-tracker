@@ -42,7 +42,6 @@ import {
 } from "@/components/ui/select";
 import HabitSelection from "../SettingsWindow/HabitSelection";
 import { AllHabitsProps, DayOption } from "@/types";
-import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const areasSchema = z.object({
   label: z.string(),
