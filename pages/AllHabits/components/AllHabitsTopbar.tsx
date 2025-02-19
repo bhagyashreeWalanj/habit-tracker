@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import AllHabitsSearchBar from "./AllHabitsSearchBar";
 import DarkMode from "./DarkMode";
 
 import { UserButton, useUser } from "@clerk/nextjs";
-import { useGlobalContextProvider } from "@/types/contextApi";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const AllHabitsTopbar = () => {
-  // const { openSideBarObject } = useGlobalContextProvider();
-  // const { setOpenSideBar } = openSideBarObject;
   const { user } = useUser();
 
   const userButtonAppearance = {

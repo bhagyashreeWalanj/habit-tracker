@@ -1,7 +1,6 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { UserButton } from "@clerk/nextjs";
-import { useGlobalContextProvider } from "@/types/contextApi";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const Topbar = ({

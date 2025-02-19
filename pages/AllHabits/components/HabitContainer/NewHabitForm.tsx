@@ -74,7 +74,6 @@ const NewHabitForm = ({
 }: {
   setCloseModalAfterSubmit: () => void;
 }) => {
-  const [iconSelected, setIconSelected] = useState<IconProp>(faLayerGroup);
   const [allDays, setAllDays] = useState<DayOption[]>(WeekDays);
   const { toast } = useToast();
   const { allHabitsObject, allAreasObject } = useGlobalContextProvider();
@@ -104,10 +103,10 @@ const NewHabitForm = ({
     },
   });
 
-  const handleIconSelected = (icon: IconProp) => {
-    setIconSelected(icon);
-    form.setValue("icon", icon);
-  };
+  // const handleIconSelected = (icon: IconProp) => {
+  //   setIconSelected(icon);
+  //   form.setValue("icon", icon);
+  // };
   const changeOption = (indexClicked: number, option: string) => {
     if (option === "repeat") {
       const updatedOption = repeatOptions.map((option, index) => ({
@@ -212,12 +211,7 @@ const NewHabitForm = ({
                 <div className="flex gap-4 justify-between items-center ">
                   <HabitSelection control={form.control} name="habitName" />
 
-                  <IconsWindow
-                    iconSelected={iconSelected}
-                    setIconSelected={handleIconSelected}
-                    control={form.control}
-                    name="icon"
-                  />
+                  <IconsWindow control={form.control} name="icon" />
                 </div>
               </FormControl>
               <FormMessage />

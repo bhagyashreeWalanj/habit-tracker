@@ -11,23 +11,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Control, useController } from "react-hook-form";
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { iconsData } from "./IconsData";
-import { HabitType } from "@/types/GlobalTypes";
 import { z } from "zod";
 import { formSchema } from "../HabitContainer/NewHabitForm";
 
 type IconsWindowProps = {
-  setIconSelected: (icon: IconProp) => void;
-  iconSelected: IconProp;
   control?: Control<z.infer<typeof formSchema>>;
   name: keyof z.infer<typeof formSchema>;
 };
 
-export default function IconsWindow({
-  setIconSelected,
-  iconSelected,
-  control,
-  name,
-}: IconsWindowProps) {
+export default function IconsWindow({ control, name }: IconsWindowProps) {
   const [open, setOpen] = React.useState(false);
   const { field } = useController({
     name,

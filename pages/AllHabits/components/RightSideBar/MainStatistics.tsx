@@ -120,7 +120,7 @@ const MainStatistics = () => {
     copyStatsInfo[0].num = totalStreak;
     copyStatsInfo[1].num = perfectDays;
     setStatisticsInfo(copyStatsInfo);
-  }, [allHabits]);
+  }, []);
 
   return (
     <div className="flex mx-4 flex-col gap-6 justify-center items-center mt-14 bg-slate-50 dark:bg-slate-800 text-primary dark:text-white rounded-xl  p-5 pt-7">
