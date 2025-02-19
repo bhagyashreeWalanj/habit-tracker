@@ -1,4 +1,3 @@
-import { Option } from "@/components/ui/multiple-selector";
 import { DayOption, HabitSelect } from "@/types";
 
 export enum MenuOptions {

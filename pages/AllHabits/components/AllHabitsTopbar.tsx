@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
 import AllHabitsSearchBar from "./AllHabitsSearchBar";
 import DarkMode from "./DarkMode";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
+
 import { UserButton, useUser } from "@clerk/nextjs";
 import { useGlobalContextProvider } from "@/types/contextApi";
-// import ThemeChanger from "@/components/ThemeChanger";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const AllHabitsTopbar = () => {
   const { openSideBarObject } = useGlobalContextProvider();
-  const { openSideBar, setOpenSideBar } = openSideBarObject;
+  const { setOpenSideBar } = openSideBarObject;
   const { user } = useUser();
 
   const userButtonAppearance = {

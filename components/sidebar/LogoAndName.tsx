@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import { Label } from "../ui/label";
 
 const LogoAndName = () => {
   return (

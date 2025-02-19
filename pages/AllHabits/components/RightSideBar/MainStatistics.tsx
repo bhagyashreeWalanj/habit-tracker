@@ -83,7 +83,7 @@ const MainStatistics = () => {
     });
 
     let perfectDaysCount = 0;
-    let totalHabitsInEachDay: { [key: string]: number } = {};
+    const totalHabitsInEachDay: { [key: string]: number } = {};
     const uniqueDates = Object.keys(dateCounts);
     for (const date of uniqueDates) {
       const getTwoFirstDayLetter = getCurrentDayName(date).slice(0, 2);

@@ -6,8 +6,8 @@ import { HabitType } from "@/types/GlobalTypes";
 import { getCurrentDayName } from "@/utils/DateFunctions";
 import HabitsEmptyPlaceHolder from "@/app/emptyPlaceholder/HabitsEmptyPlaceHolder";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBullseye, faFlagCheckered } from "@fortawesome/free-solid-svg-icons";
-import { motion, AnimatePresence } from "framer-motion";
+import { faFlagCheckered } from "@fortawesome/free-solid-svg-icons";
+import { AnimatePresence } from "framer-motion";
 
 const HabitContainerMiddle = () => {
   const {

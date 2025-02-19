@@ -36,7 +36,10 @@ export function StepChart() {
     <Card className="flex flex-col transition-all hover:shadow-2xl shadow-md">
       <CardHeader className="items-center pb-2">
         <CardTitle className="text-xl">Daily Step Counter</CardTitle>
-        <CardDescription className="text-xs"> Today's Progress</CardDescription>
+        <CardDescription className="text-xs">
+          {" "}
+          Today&apos;s Progress
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -105,7 +108,7 @@ export function StepChart() {
           <Footprints className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Keep going! You're making great progress.
+          Keep going! You&apos;re making great progress.
         </div>
       </CardFooter>
     </Card>

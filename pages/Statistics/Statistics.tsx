@@ -1,5 +1,4 @@
 import React from "react";
-import StatisticsBoard from "./components/StatisticBoard";
 import Topbar from "@/components/topbar/Topbar";
 import StatisticNewBoard from "./StatisticNewBoard";
 import WeeklyBarChart from "./charts/WeeklyBarChart";

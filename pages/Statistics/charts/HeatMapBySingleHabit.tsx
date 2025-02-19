@@ -3,13 +3,7 @@
 import { useState, useEffect } from "react";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
-import {
-  subYears,
-  format,
-  eachDayOfInterval,
-  startOfYear,
-  endOfYear,
-} from "date-fns";
+import { format, startOfYear, endOfYear } from "date-fns";
 import { Tooltip } from "react-tooltip";
 import { HabitType } from "@/types/GlobalTypes";
 
@@ -22,8 +16,8 @@ type HabitEntry = {
 // Generate sample data for a year
 const generateYearData = (habit: HabitType): HabitEntry[] => {
   const currentYear = new Date().getFullYear();
-  const startDate = startOfYear(new Date(currentYear, 0, 1));
-  const endDate = endOfYear(new Date(currentYear, 11, 31));
+  // const startDate = startOfYear(new Date(currentYear, 0, 1));
+  // const endDate = endOfYear(new Date(currentYear, 11, 31));
   const dateMap: { [date: string]: number } = {};
   habit.completedDays.forEach((day) => {
     if (dateMap[day.date]) {
@@ -38,15 +32,6 @@ const generateYearData = (habit: HabitType): HabitEntry[] => {
     count: dateMap[date], // 0-4 for different intensity levels
   }));
 };
-const heatMapData: HabitEntry[] = [
-  { date: "2025-02-10", count: 2 },
-  { date: "2025-02-10", count: 4 },
-  { date: "2025-02-06", count: 1 },
-  { date: "2025-02-05", count: 0 },
-  { date: "2025-02-04", count: 3 },
-  { date: "2025-02-03", count: 1 },
-  { date: "2025-02-14", count: 5 },
-];
 // Color scheme based on #c20c1c
 const colorScheme = [
   "#fde8ea", // Lightest shade

@@ -1,5 +1,4 @@
 import React from "react";
-import { useRouter } from "next/navigation";
 
 import {
   Sidebar,
@@ -47,7 +46,7 @@ export function AppSidebar() {
             <SidebarGroupContent>
               <SidebarMenu>
                 <div className="mt-[180px]">
-                  {menuItems.map((menuItem: menuItemType, index) => (
+                  {menuItems.map((menuItem: menuItemType) => (
                     <React.Fragment key={`${menuItem.id}_${menuItem.name}`}>
                       <SidebarMenuItem
                         className=""

@@ -36,7 +36,7 @@ export function SleepChart() {
       <CardHeader className="items-center pb-2">
         <CardTitle className="text-xl">Sleep Tracker</CardTitle>
         <CardDescription className="text-xs">
-          Last Night's Sleep
+          Last Night&apos;s Sleep
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">

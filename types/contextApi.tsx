@@ -19,7 +19,6 @@ import {
 import { DarkModeItem } from "./DarkModeTypes";
 import { AreaType, HabitType } from "./GlobalTypes";
 import { getDateString } from "@/utils/DateFunctions";
-import { v4 as uuidv4 } from "uuid";
 import { sampleHabitData } from "@/constants/sampleHabitData";
 
 const GlobalContext = createContext<GlobalContextType>({
@@ -96,7 +95,7 @@ function GlobalContextProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const fetchData = () => {
-      const allHabitData: HabitType[] = sampleHabitData;
+      let allHabitData: HabitType[] = sampleHabitData;
 
       setTimeout(() => {
         setAllHabits(allHabitData);

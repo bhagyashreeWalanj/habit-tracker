@@ -1,6 +1,5 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
 import {
   Label,
   PolarGrid,
@@ -19,7 +18,7 @@ import {
 } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoePrints, faStepForward } from "@fortawesome/free-solid-svg-icons";
+import { faShoePrints } from "@fortawesome/free-solid-svg-icons";
 
 const chartData = [
   {
@@ -30,21 +29,6 @@ const chartData = [
     description: "Target 8000",
   },
 ];
-//   {
-//     steps: 2000,
-//     total: 8000,
-//     fill: "hsl(var(--primary))",
-//     title: "Steps Counter",
-//     description: "Target 8000",
-//   },
-//   {
-//     steps: 2000,
-//     total: 8000,
-//     fill: "hsl(var(--primary))",
-//     title: "Steps Counter",
-//     description: "Target 8000",
-//   },
-// ];
 
 const chartConfig = {
   steps: {
@@ -120,7 +104,7 @@ export default function CircularChartForCounts() {
             <FontAwesomeIcon icon={faShoePrints} className="h-4 w-4" />
           </div>
           <div className="leading-none text-muted-foreground">
-            Keep going! You're making great progress.
+            Keep going! You&apos;re making great progress.
           </div>
         </CardFooter>
       </Card>

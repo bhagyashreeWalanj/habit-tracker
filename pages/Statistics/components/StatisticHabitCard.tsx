@@ -1,5 +1,4 @@
 import { HabitType } from "@/types/GlobalTypes";
-import { faArrowCircleDown, faBook } from "@fortawesome/free-solid-svg-icons";
 import type { IconLookup } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";

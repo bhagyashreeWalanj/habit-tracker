@@ -11,24 +11,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogFooter,
-} from "@/components/ui/alert-dialog";
-import { DialogActions } from "@mui/material";
 
 export function ActionMenu() {
   const [openDialog, setOpenDialog] = useState<"edit" | "delete" | null>(null);
-  const [isEditOpen, setIsEditOpen] = useState(false);
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   const handleOpenChange = (open: boolean) => {
     if (!open) {
@@ -69,7 +59,7 @@ export function ActionMenu() {
           <DialogHeader>
             <DialogTitle>Edit Habit</DialogTitle>
             <DialogDescription>
-              Make changes to your item here. Click save when you're done.
+              Make changes to your item here. Click save when you&apos;re done.
             </DialogDescription>
           </DialogHeader>
           {/* Add your edit form here */}

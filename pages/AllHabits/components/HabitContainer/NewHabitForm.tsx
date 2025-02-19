@@ -18,14 +18,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faChevronDown,
-  faClose,
-  faCopy,
   faLayerGroup,
   faMinus,
   faPlus,
-  faQuestion,
-  faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 
 import IconsWindow from "../IconWindow/IconsWindow";
@@ -33,7 +28,6 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import MultipleSelector from "@/components/ui/multiple-selector";
-import type { IconName, IconPrefix } from "@fortawesome/fontawesome-svg-core";
 
 import { WeekDays } from "@/constants";
 import TimeWindow from "../TimeWindow/TimeWindow";
@@ -50,12 +44,6 @@ import {
 } from "@/components/ui/select";
 import HabitSelection from "../SettingsWindow/HabitSelection";
 import { AllHabitsProps, DayOption } from "@/types";
-
-// This type represents the structure of the icon data from the database
-type IconData = {
-  prefix: IconPrefix;
-  name: IconName;
-};
 
 const areasSchema = z.object({
   label: z.string(),
@@ -89,17 +77,15 @@ const NewHabitForm = ({
 }) => {
   const [iconSelected, setIconSelected] = useState<IconProp>(faLayerGroup);
   const [allDays, setAllDays] = useState<DayOption[]>(WeekDays);
-  const router = useRouter();
   const { toast } = useToast();
   const { allHabitsObject, allAreasObject } = useGlobalContextProvider();
   const { allHabits, setAllHabits } = allHabitsObject;
-  const { allAreas, setAllAreas } = allAreasObject;
+  const { allAreas } = allAreasObject;
   const [repeatOptions, setRepeatOptions] = useState([
     { name: "Daily", isSelected: true },
     { name: "Weekly", isSelected: false },
     // { name: "Monthly", isSelected: false },
   ]);
-  const [habitSelected, setHabitSelected] = useState("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -220,22 +206,13 @@ const NewHabitForm = ({
         <FormField
           control={form.control}
           name="habitName"
-          render={({ field }) => (
+          render={() => (
             <FormItem>
               <FormLabel className="font-bold text-base">Habit Name</FormLabel>
               <FormControl>
                 <div className="flex gap-4 justify-between items-center ">
-                  <HabitSelection
-                    habitSelected={habitSelected}
-                    setHabitSelected={setHabitSelected}
-                    control={form.control}
-                    name="habitName"
-                  />
-                  {/* <Input
-                    placeholder="Type a habit name..."
-                    {...field}
-                    className="border w-full border-gray-200 outline-none p-4 rounded-md text-[13px]"
-                  />  */}
+                  <HabitSelection control={form.control} name="habitName" />
+
                   <IconsWindow
                     iconSelected={iconSelected}
                     setIconSelected={handleIconSelected}
@@ -326,7 +303,7 @@ const NewHabitForm = ({
           <FormField
             control={form.control}
             name="frequency.days"
-            render={({ field }) => (
+            render={() => (
               <FormItem className="flex flex-col gap-2 mt-10 px-3">
                 <FormLabel className="font-bold text-base">
                   Days to Repeat
@@ -411,8 +388,8 @@ const NewHabitForm = ({
                   {field.value === true ? (
                     <TimeWindow
                       setTimeSelected={setNotificationTime}
-                      control={form.control}
-                      name="notificationTime"
+                      // control={form.control}
+                      //  name="notificationTime"
                     />
                   ) : (
                     ""

@@ -8,14 +8,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+
 import {
   Select,
   SelectContent,
@@ -27,21 +20,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { type Control, useController } from "react-hook-form";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 
 type TimeWindowProps = {
   setTimeSelected: (time: string) => void;
-  control: Control<any>;
-  name: string;
+  // control: Control<any>;
+  // name: string;
 };
 
 export default function TimeWindow({
   setTimeSelected,
-  control,
-  name,
-}: TimeWindowProps) {
+}: // control,
+// name,
+TimeWindowProps) {
   const [open, setOpen] = React.useState(false);
-  const { field } = useController({ name, control });
+  //const { field } = useController({ name, control });
 
   const hours = Array.from({ length: 12 }, (_, i) =>
     (i + 1).toString().padStart(2, "0")

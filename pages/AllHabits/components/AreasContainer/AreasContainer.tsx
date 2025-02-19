@@ -1,8 +1,7 @@
 "use client";
 
-import { AreaType, HabitType } from "@/types/GlobalTypes";
+import { AreaType } from "@/types/GlobalTypes";
 import { useGlobalContextProvider } from "@/types/contextApi";
-import { getCurrentDayName } from "@/utils/DateFunctions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 

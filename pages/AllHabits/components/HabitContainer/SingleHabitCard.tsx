@@ -1,6 +1,6 @@
 "use client";
 import { HabitType } from "@/types/GlobalTypes";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import type { IconLookup } from "@fortawesome/fontawesome-svg-core";
 import { motion } from "framer-motion";
 
@@ -8,24 +8,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Checkbox } from "@/components/ui/checkbox";
 // Dynamically import all icons
 import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faDeleteLeft,
-  faEdit,
-  faTrashCan,
-  faUser,
-  fas,
-} from "@fortawesome/free-solid-svg-icons";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 
 // Add all icons to the library
 library.add(fas, far, fab);
-import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { Circle, CircleCheck } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import { useGlobalContextProvider } from "@/types/contextApi";
-import DeleteHabit from "../SettingsWindow/DeleteHabit";
-import { Button } from "@/components/ui/button";
 import { ActionMenu } from "../SettingsWindow/ActionMenu";
 
 const SingleHabitCard = ({
@@ -43,15 +34,13 @@ const SingleHabitCard = ({
   const [checked, setChecked] = useState(
     singleHabit.completedDays.some((day) => day.date === selectedCurrentDate)
   );
-  //
+
   const iconLookup: IconLookup = {
     prefix: singleHabit.icon.prefix,
     iconName: singleHabit.icon.iconName,
   };
 
   const handleCheckboxChecked = (checked: boolean) => {
-    console.log("checked", checked);
-    // const checkedNow = event.target.checked;
     setChecked(checked);
     if (checked === true) {
       checkHabit();
@@ -60,16 +49,16 @@ const SingleHabitCard = ({
     }
   };
   // Reorder habits based on checked state
-  const sortedHabits = (updateAllHabits: any) => {
-    return updateAllHabits.sort((a: any, b: any) => {
+  const sortedHabits = (updateAllHabits: HabitType[]) => {
+    return updateAllHabits.sort((a: HabitType, b: HabitType) => {
       if (
-        a.completedDays.some((day: any) => day.date === selectedCurrentDate) &&
-        !b.completedDays.some((day: any) => day.date === selectedCurrentDate)
+        a.completedDays.some((day) => day.date === selectedCurrentDate) &&
+        !b.completedDays.some((day) => day.date === selectedCurrentDate)
       )
         return 1;
       if (
-        !a.completedDays.some((day: any) => day.date === selectedCurrentDate) &&
-        b.completedDays.some((day: any) => day.date === selectedCurrentDate)
+        !a.completedDays.some((day) => day.date === selectedCurrentDate) &&
+        b.completedDays.some((day) => day.date === selectedCurrentDate)
       )
         return -1;
       return 0;

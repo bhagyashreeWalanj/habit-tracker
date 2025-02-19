@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useUser } from "@clerk/nextjs";
-// import Sidebar from "@/components/sidebar/Sidebar";
 import { useGlobalContextProvider } from "@/types/contextApi";
 import { menuItemType } from "@/types/MenuItemType";
 import AllHabits from "@/pages/AllHabits/AllHabits";
@@ -11,7 +9,7 @@ import Areas from "@/pages/Areas/Areas";
 import { MenuOptions } from "@/constants";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/sidebar/sidebar-new/app-sidebar";
 import WorkoutContainer from "@/pages/Workout/WorkoutContainer";
 
@@ -64,7 +62,7 @@ export default Dashboard;
 
 function BlackSoftLayer() {
   const { openSideBarObject } = useGlobalContextProvider();
-  const { openSideBar, setOpenSideBar } = openSideBarObject;
+  const { openSideBar } = openSideBarObject;
   return (
     <div
       className={`w-full h-full bg-black fixed top-0 left-0 opacity-20 z-40 ${

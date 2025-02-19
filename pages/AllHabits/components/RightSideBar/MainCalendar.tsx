@@ -6,11 +6,10 @@ import { useTheme } from "next-themes";
 import { useGlobalContextProvider } from "@/types/contextApi";
 
 const MainCalendar = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const { selectedCurrentDateObject, offsetDayObject } =
     useGlobalContextProvider();
-  const { selectedCurrentDate, setSelectedCurrentDate } =
-    selectedCurrentDateObject;
+  const { selectedCurrentDate } = selectedCurrentDateObject;
   const { setOffsetDay } = offsetDayObject;
 
   const value: Dayjs | null = selectedCurrentDate

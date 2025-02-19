@@ -1,15 +1,12 @@
 "use client";
+
 import LogoAndName from "@/components/sidebar/LogoAndName";
-import { AppSidebar } from "@/components/sidebar/sidebar-new/app-sidebar";
 import { useAuth } from "@clerk/nextjs";
-import { AppleIcon } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
   const { userId } = useAuth();
-  console.log("userId", userId);
   return (
     <header>
       <div className="p-8 px-20">

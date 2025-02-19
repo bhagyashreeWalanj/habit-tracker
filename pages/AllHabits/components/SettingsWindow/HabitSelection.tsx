@@ -1,15 +1,9 @@
 "use client";
 
-import * as React from "react";
-import { Check, Plus } from "lucide-react";
-import type {
-  IconLookup,
-  IconName,
-  IconPrefix,
-} from "@fortawesome/fontawesome-svg-core";
+import React, { useState } from "react";
+import type { IconLookup } from "@fortawesome/fontawesome-svg-core";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -24,49 +18,22 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
-import { HabitSuggestions, HabitSuggestions1 } from "@/constants";
+import { HabitSuggestions } from "@/constants";
 import { Control, useController } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { HabitSelect } from "@/types";
 
-type Habit = {
-  id: number;
-  name: string;
-  icon: { prefix: IconPrefix; iconName: IconName };
-};
-
-type Category = {
-  id: number;
-  title: string;
-  areas: Habit[];
-};
 type HabitSelectionProp = {
-  setHabitSelected: (value: string) => void;
-  habitSelected: string;
   control: Control<any>;
   name: string;
 };
-const HabitSelection = ({
-  setHabitSelected,
-  habitSelected,
-  control,
-  name,
-}: HabitSelectionProp) => {
-  // const [open, setOpen] = useState(false);
-  // const [inputValue, setInputValue] = useState("");
+const HabitSelection = ({ control, name }: HabitSelectionProp) => {
   const { field } = useController({ name, control });
 
-  const handleSelect = (value: string) => {
-    setInputValue(value);
-    field.onChange(value);
-    setOpen(false);
-  };
-  const [open, setOpen] = React.useState(false);
-  const [inputValue, setInputValue] = React.useState("");
-  const [selectedHabit, setSelectedHabit] = React.useState<string | undefined>(
-    ""
-  );
-  const [habits, setHabits] = React.useState<HabitSelect[]>(HabitSuggestions);
+  const [open, setOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [selectedHabit, setSelectedHabit] = useState<string | undefined>("");
+  const [habits, setHabits] = useState<HabitSelect[]>(HabitSuggestions);
 
   const handleSelectHabit = (habitName: string) => {
     setSelectedHabit(habitName);
@@ -75,51 +42,16 @@ const HabitSelection = ({
     setOpen(false);
   };
 
-  const handleCreateHabit = () => {
-    if (inputValue.trim()) {
-      const newHabit: Habit = {
-        id: Date.now(), // Use timestamp as a simple unique id
-        name: inputValue.trim(),
-        icon: { prefix: "fas", iconName: "star" }, // Default icon
-      };
-
-      // Add the new habit to the "Most Popular Habits" category
-      setHabits((prevHabits) => {
-        const updatedHabits = [...prevHabits];
-        const popularHabitsCategory = updatedHabits.find(
-          (category) => category.id === 1
-        );
-        if (popularHabitsCategory) {
-          popularHabitsCategory.areas.unshift(newHabit);
-        }
-        return updatedHabits;
-      });
-
-      setSelectedHabit(newHabit.name);
-      setInputValue(newHabit.name);
-      setOpen(false);
-    }
-  };
-
   return (
     <div className="w-full">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <div className="relative  w-full flex items-center rounded-md border focus-within:ring-1 focus-within:ring-ring ">
             <Input
-              // value={inputValue}
-              // onChange={handleInputChange}
               {...field}
               placeholder="Search or create a habit..."
               className="rounded-r-none w-full"
             />
-            {/* <Button
-              variant="outline"
-              className="rounded-l-none"
-              onClick={handleCreateHabit}
-            > 
-              <Plus className="h-4 w-4" />
-            </Button>*/}
           </div>
         </PopoverTrigger>
         <PopoverContent

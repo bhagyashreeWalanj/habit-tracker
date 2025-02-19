@@ -15,7 +15,7 @@ const Hero = () => {
           className="block text-sm font-light rounded-lg  px-9 py-3  text-white transition bg-primary   focus:outline-none  "
           type="button"
         >
-          Let's get started!
+          Let&apos;s get started!
         </button>
       </div>
     </div>

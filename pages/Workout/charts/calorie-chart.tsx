@@ -38,7 +38,9 @@ export function CalorieChart() {
     <Card className="flex flex-col transition-all hover:shadow-2xl shadow-md">
       <CardHeader className="items-center pb-2">
         <CardTitle className="text-xl">Calorie Count</CardTitle>
-        <CardDescription className="text-xs">Today's Intake</CardDescription>
+        <CardDescription className="text-xs">
+          Today&apos;s Intake
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer

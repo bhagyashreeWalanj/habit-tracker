@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -10,26 +10,12 @@ import { Button } from "@/components/ui/button";
 
 const DarkMode = () => {
   const { darkModeObject } = useGlobalContextProvider();
-  const { isDarkMode, setDarkMode, darkModeItems, setDarkModeItems } =
-    darkModeObject;
+  const { setDarkMode, darkModeItems, setDarkModeItems } = darkModeObject;
   const { theme, setTheme } = useTheme();
-
-  const handleClickedMode = (singleItemIndex: number) => {
-    const updatedDarkModeItems = darkModeItems.map(
-      (darkModeItem: any, index: number) => {
-        if (singleItemIndex === index) {
-          return { ...darkModeItem, isSelected: true };
-        } else {
-          return { ...darkModeItem, isSelected: false };
-        }
-      }
-    );
-    setDarkModeItems(updatedDarkModeItems);
-  };
 
   // When mounted on client, now we can show the UI
   useEffect(() => {
-    darkModeItems.forEach((singleItem) => {
+    darkModeItems.forEach((singleItem: any) => {
       if (singleItem.id === 1 && singleItem.isSelected) {
         setDarkMode(false);
         setTheme("light");

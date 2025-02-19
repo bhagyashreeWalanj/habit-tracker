@@ -12,7 +12,7 @@ const Topbar = ({
   description: string;
 }) => {
   const { openSideBarObject } = useGlobalContextProvider();
-  const { openSideBar, setOpenSideBar } = openSideBarObject;
+  const { setOpenSideBar } = openSideBarObject;
 
   const userButtonAppearance = {
     elements: {

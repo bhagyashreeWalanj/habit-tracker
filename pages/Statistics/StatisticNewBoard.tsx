@@ -1,6 +1,5 @@
 "use client";
 import { Card } from "@/components/ui/card";
-import type { IconLookup } from "@fortawesome/fontawesome-svg-core";
 // Dynamically import all icons
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -9,7 +8,6 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 
 // Add all icons to the library
 library.add(fas, far, fab);
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useGlobalContextProvider } from "@/types/contextApi";
@@ -51,8 +49,6 @@ const statisticData = [
 const StatisticNewBoard = () => {
   const {
     allHabitsObject: { allHabits },
-    selectedAreaTabObject,
-    selectedCurrentDateObject: { selectedCurrentDate },
   } = useGlobalContextProvider();
   const [stats, setStats] = useState<statisticCard[]>(statisticData);
 
@@ -71,7 +67,7 @@ const StatisticNewBoard = () => {
     });
 
     let perfectDaysCount = 0;
-    let totalHabitsInEachDay: { [key: string]: number } = {};
+    const totalHabitsInEachDay: { [key: string]: number } = {};
     const uniqueDates = Object.keys(dateCounts);
     for (const date of uniqueDates) {
       const getTwoFirstDayLetter = getCurrentDayName(date).slice(0, 2);
