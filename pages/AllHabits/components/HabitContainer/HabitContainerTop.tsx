@@ -1,14 +1,12 @@
-import { CircleArrowLeft, CircleArrowRight, PlusIcon } from "lucide-react";
 import React, { useEffect } from "react";
+import { CircleArrowLeft, CircleArrowRight } from "lucide-react";
 import CreateNewHabit from "./CreateNewHabit";
 import {
   getCurrentDayName,
   getDateString,
   getFormattedDate,
 } from "@/utils/DateFunctions";
-import GlobalContextProvider, {
-  useGlobalContextProvider,
-} from "@/types/contextApi";
+import { useGlobalContextProvider } from "@/types/contextApi";
 
 type Option = "next" | "prev";
 const HabitContainerTop = () => {

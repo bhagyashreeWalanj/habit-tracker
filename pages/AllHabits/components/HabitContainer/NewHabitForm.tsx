@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -24,7 +23,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import IconsWindow from "../IconWindow/IconsWindow";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import MultipleSelector from "@/components/ui/multiple-selector";
@@ -44,12 +42,13 @@ import {
 } from "@/components/ui/select";
 import HabitSelection from "../SettingsWindow/HabitSelection";
 import { AllHabitsProps, DayOption } from "@/types";
+import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const areasSchema = z.object({
   label: z.string(),
   value: z.string(),
 });
-const formSchema = z.object({
+export const formSchema = z.object({
   habitName: z
     .string({ message: "The habit name field is still empty!" })
     .min(2, {
@@ -105,7 +104,7 @@ const NewHabitForm = ({
     },
   });
 
-  const handleIconSelected = (icon: any) => {
+  const handleIconSelected = (icon: IconProp) => {
     setIconSelected(icon);
     form.setValue("icon", icon);
   };

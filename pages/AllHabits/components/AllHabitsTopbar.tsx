@@ -7,8 +7,8 @@ import { useGlobalContextProvider } from "@/types/contextApi";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const AllHabitsTopbar = () => {
-  const { openSideBarObject } = useGlobalContextProvider();
-  const { setOpenSideBar } = openSideBarObject;
+  // const { openSideBarObject } = useGlobalContextProvider();
+  // const { setOpenSideBar } = openSideBarObject;
   const { user } = useUser();
 
   const userButtonAppearance = {
@@ -20,15 +20,15 @@ const AllHabitsTopbar = () => {
   // function openSideBarFunction() {
   //   setOpenSideBar(!openSideBar);
   // }
-  useEffect(() => {
-    function handleResize() {
-      setOpenSideBar(false);
-    }
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  // useEffect(() => {
+  //   function handleResize() {
+  //     setOpenSideBar(false);
+  //   }
+  //   window.addEventListener("resize", handleResize);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
 
   return (
     <>

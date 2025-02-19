@@ -2,7 +2,7 @@
 
 import { HabitType } from "@/types/GlobalTypes";
 import { calculateStreak, getCurrentDayName } from "@/utils/DateFunctions";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Pie, Cell, PieChart, Label } from "recharts";
 import { useGlobalContextProvider } from "@/types/contextApi";
 
@@ -11,6 +11,42 @@ type statsInfo = {
   num: number;
   subTitle: string;
 };
+
+function calculateTotalPerfectDays(habit: HabitType[]) {
+  const dateCounts: { [key: string]: number } = {};
+
+  habit.forEach((habit) => {
+    habit.completedDays.forEach((day) => {
+      const date = day.date;
+      if (dateCounts[date]) {
+        dateCounts[date] += 1;
+      } else {
+        dateCounts[date] = 1;
+      }
+    });
+  });
+
+  let perfectDaysCount = 0;
+  const totalHabitsInEachDay: { [key: string]: number } = {};
+  const uniqueDates = Object.keys(dateCounts);
+  for (const date of uniqueDates) {
+    const getTwoFirstDayLetter = getCurrentDayName(date).slice(0, 2);
+
+    const numberOfHabitsEachDays = habit.filter((singleHabit) => {
+      return singleHabit.frequency.days.some(
+        (day) => day === getTwoFirstDayLetter
+      );
+    });
+
+    totalHabitsInEachDay[date] = numberOfHabitsEachDays.length;
+  }
+  for (const date in totalHabitsInEachDay) {
+    if (totalHabitsInEachDay[date] === dateCounts[date]) {
+      perfectDaysCount++;
+    }
+  }
+  return perfectDaysCount;
+}
 
 const MainStatistics = () => {
   const [progress, setProgress] = useState<number>(0);
@@ -29,84 +65,51 @@ const MainStatistics = () => {
     selectedCurrentDateObject: { selectedCurrentDate },
   } = useGlobalContextProvider();
 
-  const calculateThePercentageOfTodaysProgress = (allHabits: HabitType[]) => {
-    if (allHabits.length === 0 || !selectedCurrentDate) {
-      return 0;
-    }
-
-    let totalHabitsOfCompletedDays = 0;
-    let totalAllHabitsOfCurrentDay = 0;
-
-    if (allHabits) {
-      const completedHabitsOfCurrentDate = allHabits.filter((habit) => {
-        return habit.completedDays.some(
-          (day) => day.date === selectedCurrentDate
-        );
-      });
-
-      totalHabitsOfCompletedDays = completedHabitsOfCurrentDate.length;
-      const getTwoLettersOfCurrentDay = getCurrentDayName(
-        selectedCurrentDate
-      ).slice(0, 2);
-
-      const allHabitsOfCurrentDay = allHabits.filter((habit) => {
-        return habit.frequency.days.some(
-          (day) => day === getTwoLettersOfCurrentDay
-        );
-      });
-      totalAllHabitsOfCurrentDay = allHabitsOfCurrentDay.length;
-
-      const result = Math.round(
-        (totalHabitsOfCompletedDays / totalAllHabitsOfCurrentDay) * 100
-      );
-
-      if (result === undefined || isNaN(result)) {
+  const calculateThePercentageOfTodaysProgress = useCallback(
+    (allHabits: HabitType[]) => {
+      if (allHabits.length === 0 || !selectedCurrentDate) {
         return 0;
       }
-      return result;
-    }
-    return 0;
-  };
 
-  function calculateTotalPerfectDays(habit: HabitType[]) {
-    const dateCounts: { [key: string]: number } = {};
+      let totalHabitsOfCompletedDays = 0;
+      let totalAllHabitsOfCurrentDay = 0;
 
-    habit.forEach((habit) => {
-      habit.completedDays.forEach((day) => {
-        const date = day.date;
-        if (dateCounts[date]) {
-          dateCounts[date] += 1;
-        } else {
-          dateCounts[date] = 1;
-        }
-      });
-    });
+      if (allHabits) {
+        const completedHabitsOfCurrentDate = allHabits.filter((habit) => {
+          return habit.completedDays.some(
+            (day) => day.date === selectedCurrentDate
+          );
+        });
 
-    let perfectDaysCount = 0;
-    const totalHabitsInEachDay: { [key: string]: number } = {};
-    const uniqueDates = Object.keys(dateCounts);
-    for (const date of uniqueDates) {
-      const getTwoFirstDayLetter = getCurrentDayName(date).slice(0, 2);
+        totalHabitsOfCompletedDays = completedHabitsOfCurrentDate.length;
+        const getTwoLettersOfCurrentDay = getCurrentDayName(
+          selectedCurrentDate
+        ).slice(0, 2);
 
-      const numberOfHabitsEachDays = habit.filter((singleHabit) => {
-        return singleHabit.frequency.days.some(
-          (day) => day === getTwoFirstDayLetter
+        const allHabitsOfCurrentDay = allHabits.filter((habit) => {
+          return habit.frequency.days.some(
+            (day) => day === getTwoLettersOfCurrentDay
+          );
+        });
+        totalAllHabitsOfCurrentDay = allHabitsOfCurrentDay.length;
+
+        const result = Math.round(
+          (totalHabitsOfCompletedDays / totalAllHabitsOfCurrentDay) * 100
         );
-      });
 
-      totalHabitsInEachDay[date] = numberOfHabitsEachDays.length;
-    }
-    for (const date in totalHabitsInEachDay) {
-      if (totalHabitsInEachDay[date] === dateCounts[date]) {
-        perfectDaysCount++;
+        if (result === undefined || isNaN(result)) {
+          return 0;
+        }
+        return result;
       }
-    }
-    return perfectDaysCount;
-  }
+      return 0;
+    },
+    []
+  );
 
   useEffect(() => {
     setProgress(calculateThePercentageOfTodaysProgress(allHabits));
-  }, [selectedCurrentDate, allHabits]);
+  }, [selectedCurrentDate, allHabits, calculateThePercentageOfTodaysProgress]);
 
   useEffect(() => {
     const streaks = allHabits.map((habit) => calculateStreak(habit));

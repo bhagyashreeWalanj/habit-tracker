@@ -17,7 +17,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { type Control, useController } from "react-hook-form";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "@/components/ui/button";
 

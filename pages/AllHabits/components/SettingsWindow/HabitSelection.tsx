@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import type { IconLookup } from "@fortawesome/fontawesome-svg-core";
 
 import { cn } from "@/lib/utils";
 import {
@@ -22,21 +21,21 @@ import { HabitSuggestions } from "@/constants";
 import { Control, useController } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { HabitSelect } from "@/types";
+import { z } from "zod";
+import { formSchema } from "../HabitContainer/NewHabitForm";
 
 type HabitSelectionProp = {
-  control: Control<any>;
-  name: string;
+  control: Control<z.infer<typeof formSchema>>;
+  name: keyof z.infer<typeof formSchema>;
 };
 const HabitSelection = ({ control, name }: HabitSelectionProp) => {
   const { field } = useController({ name, control });
 
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [selectedHabit, setSelectedHabit] = useState<string | undefined>("");
-  const [habits, setHabits] = useState<HabitSelect[]>(HabitSuggestions);
+  const [habits] = useState<HabitSelect[]>(HabitSuggestions);
 
   const handleSelectHabit = (habitName: string) => {
-    setSelectedHabit(habitName);
     setInputValue(habitName);
     field.onChange(habitName);
     setOpen(false);
@@ -66,17 +65,12 @@ const HabitSelection = ({ control, name }: HabitSelectionProp) => {
             />
             <CommandList className="h-60">
               <CommandEmpty>
-                No habit found. Press enter or click the plus button to create "
-                {inputValue}".
+                {`No habit found. Press enter or click the plus button to create 
+                ${inputValue}.`}
               </CommandEmpty>
               {habits.map((category) => (
                 <CommandGroup key={category.id} heading={category.title}>
                   {category.areas.map((habit) => {
-                    const iconLookup: IconLookup = {
-                      prefix: habit.icon.prefix,
-                      iconName: habit.icon.iconName,
-                    };
-
                     return (
                       <CommandItem
                         key={habit.id}

@@ -11,25 +11,12 @@ const Topbar = ({
   title: string;
   description: string;
 }) => {
-  const { openSideBarObject } = useGlobalContextProvider();
-  const { setOpenSideBar } = openSideBarObject;
-
   const userButtonAppearance = {
     elements: {
       userButtonAvatarBox: "w-10 h-10",
       userButtonPopoverActionButton: "text-red-600",
     },
   };
-
-  useEffect(() => {
-    function handleResize() {
-      setOpenSideBar(false);
-    }
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <>

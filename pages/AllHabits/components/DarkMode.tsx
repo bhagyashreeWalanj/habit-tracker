@@ -7,22 +7,21 @@ import { useGlobalContextProvider } from "@/types/contextApi";
 import { useTheme } from "next-themes";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "@/components/ui/button";
+import { DarkModeItem } from "@/types/DarkModeTypes";
 
 const DarkMode = () => {
   const { darkModeObject } = useGlobalContextProvider();
-  const { setDarkMode, darkModeItems, setDarkModeItems } = darkModeObject;
+  const { setDarkMode, darkModeItems } = darkModeObject;
   const { theme, setTheme } = useTheme();
 
   // When mounted on client, now we can show the UI
   useEffect(() => {
-    darkModeItems.forEach((singleItem: any) => {
+    darkModeItems.forEach((singleItem: DarkModeItem) => {
       if (singleItem.id === 1 && singleItem.isSelected) {
         setDarkMode(false);
-        setTheme("light");
       }
       if (singleItem.id === 2 && singleItem.isSelected) {
         setDarkMode(true);
-        setTheme("dark");
       }
     });
   }, [darkModeItems, setDarkMode]);
@@ -49,36 +48,6 @@ const DarkMode = () => {
         />
       </Button>
     </div>
-
-    // <div className="bg-slate-50 w-[90px] relative rounded-3xl flex h-full">
-    //   {darkModeItems.map((singleItem, singleItemIndex) => (
-    //     <div
-    //       key={singleItemIndex}
-    //       className="h-full w-[45px] z-40 flex justify-center items-center"
-    //       //onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-    //       onClick={() => handleClickedMode(singleItemIndex)}
-    //     >
-    //       <FontAwesomeIcon
-    //         icon={singleItem.icon}
-    //         className={`${
-    //           singleItem.isSelected
-    //             ? "text-primary dark:text-white"
-    //             : "text-primary"
-    //         } cursor-pointer items-center`}
-    //         width={20}
-    //         height={20}
-    //       />
-    //     </div>
-    //   ))}
-
-    //   <div
-    //     className={` w-[38px] absolute h-[38px] top-1 transform ${
-    //       isDarkMode
-    //         ? "translate-x-[48px] bg-white dark:bg-gray-800"
-    //         : "translate-x-1 bg-white"
-    //     } transition-all rounded-full `}
-    //   ></div>
-    // </div>
   );
 };
 

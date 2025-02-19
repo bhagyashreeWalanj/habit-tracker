@@ -44,14 +44,13 @@ const HabitContainerMiddle = () => {
         filteredHabitsByFrequency,
         selectedAreaTab
       );
-      console.log("filteredData", filteredData);
       filteredHabitsByArea = filteredData;
     } else {
       filteredHabitsByArea = filteredHabitsByFrequency;
     }
 
     setAllFilteredHabits(filteredHabitsByArea);
-  }, [selectedCurrentDate, allHabits, selectedAreaTab]);
+  }, [selectedCurrentDate, allHabits, selectedAreaTab, setAllFilteredHabits]);
 
   // check if all habits  for the selected date are completed
   const isAllHabitsCompleted =

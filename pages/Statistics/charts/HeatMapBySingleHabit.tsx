@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
-import { format, startOfYear, endOfYear } from "date-fns";
+import { format } from "date-fns";
 import { Tooltip } from "react-tooltip";
 import { HabitType } from "@/types/GlobalTypes";
 
@@ -15,7 +15,7 @@ type HabitEntry = {
 
 // Generate sample data for a year
 const generateYearData = (habit: HabitType): HabitEntry[] => {
-  const currentYear = new Date().getFullYear();
+  //const currentYear = new Date().getFullYear();
   // const startDate = startOfYear(new Date(currentYear, 0, 1));
   // const endDate = endOfYear(new Date(currentYear, 11, 31));
   const dateMap: { [date: string]: number } = {};

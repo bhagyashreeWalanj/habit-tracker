@@ -8,15 +8,18 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { type Control, useController } from "react-hook-form";
+import { Control, useController } from "react-hook-form";
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { iconsData } from "./IconsData";
+import { HabitType } from "@/types/GlobalTypes";
+import { z } from "zod";
+import { formSchema } from "../HabitContainer/NewHabitForm";
 
 type IconsWindowProps = {
   setIconSelected: (icon: IconProp) => void;
   iconSelected: IconProp;
-  control: Control<any>;
-  name: string;
+  control?: Control<z.infer<typeof formSchema>>;
+  name: keyof z.infer<typeof formSchema>;
 };
 
 export default function IconsWindow({
@@ -26,10 +29,13 @@ export default function IconsWindow({
   name,
 }: IconsWindowProps) {
   const [open, setOpen] = React.useState(false);
-  const { field } = useController({ name, control });
+  const { field } = useController({
+    name,
+    control,
+  });
 
   const handleIconSelection = (icon: IconProp) => {
-    setIconSelected(icon);
+    // setIconSelected(icon);
     field.onChange(icon);
     setOpen(false);
   };
@@ -39,7 +45,7 @@ export default function IconsWindow({
       <DialogTrigger asChild>
         <FontAwesomeIcon
           className="bg-primary mt-1 p-4 rounded-md text-white cursor-pointer"
-          icon={iconSelected}
+          icon={field.value}
           height={16}
           width={20}
         />
