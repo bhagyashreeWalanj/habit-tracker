@@ -27,7 +27,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function SleepChart() {
+export default function SleepChart() {
   const completionPercentage = (chartData[0].sleep / chartData[0].total) * 100;
   const endAngle = (completionPercentage / 100) * 360;
 

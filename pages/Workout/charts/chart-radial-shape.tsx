@@ -28,7 +28,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function StepChart() {
+export default function StepChart() {
   const completionPercentage = (chartData[0].steps / chartData[0].total) * 100;
   const endAngle = (completionPercentage / 100) * 360;
 

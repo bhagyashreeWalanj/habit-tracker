@@ -35,7 +35,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function WeightChart() {
+export default function WeightChart() {
   const currentWeight = chartData[chartData.length - 1].weight;
   const goalWeight = 57.2;
   const weightToLose = (currentWeight - goalWeight).toFixed(1);

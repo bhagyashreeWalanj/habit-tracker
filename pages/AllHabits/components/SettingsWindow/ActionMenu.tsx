@@ -17,7 +17,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-export function ActionMenu() {
+export default function ActionMenu() {
   const [openDialog, setOpenDialog] = useState<"edit" | "delete" | null>(null);
 
   const handleOpenChange = (open: boolean) => {

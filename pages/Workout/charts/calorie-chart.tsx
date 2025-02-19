@@ -29,7 +29,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function CalorieChart() {
+export default function CalorieChart() {
   const completionPercentage =
     (chartData[0].calories / chartData[0].total) * 100;
   const endAngle = (completionPercentage / 100) * 360;
