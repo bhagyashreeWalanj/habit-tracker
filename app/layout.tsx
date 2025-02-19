@@ -41,9 +41,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
-      {/* @ts-expect-error Server Component */}
-      <ClerkProvider>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning={true}>
         <GlobalContextProvider>
           <body
             className={cn(
@@ -62,7 +61,7 @@ export default function RootLayout({
             <Toaster />
           </body>
         </GlobalContextProvider>
-      </ClerkProvider>
-    </html>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -16,8 +16,6 @@ import { useGlobalContextProvider } from "@/types/contextApi";
 import { menuItemType } from "@/types/MenuItemType";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// Menu items.
-
 export function AppSidebar() {
   const { menuItemsObject } = useGlobalContextProvider();
   const { menuItems, setMenuItems } = menuItemsObject;
