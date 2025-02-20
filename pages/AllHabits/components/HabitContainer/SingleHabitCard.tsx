@@ -17,7 +17,7 @@ library.add(fas, far, fab);
 import { Circle, CircleCheck } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import { useGlobalContextProvider } from "@/types/contextApi";
-import { ActionMenu } from "../SettingsWindow/ActionMenu";
+import ActionMenu from "../SettingsWindow/ActionMenu";
 
 const SingleHabitCard = ({
   singleHabit,

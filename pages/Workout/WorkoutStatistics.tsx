@@ -2,10 +2,10 @@
 
 import React from "react";
 
-import { StepChart } from "./charts/chart-radial-shape";
-import { CalorieChart } from "./charts/calorie-chart";
-import { SleepChart } from "./charts/sleep-chart";
-import { WeightChart } from "./charts/weight-chart";
+import StepChart from "./charts/chart-radial-shape";
+import CalorieChart from "./charts/calorie-chart";
+import SleepChart from "./charts/sleep-chart";
+import WeightChart from "./charts/weight-chart";
 
 const WorkoutStatistics = () => {
   return (
