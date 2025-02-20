@@ -1,31 +1,19 @@
-import React from "react";
+"use client";
+import * as React from "react";
 import AllHabitsSearchBar from "./AllHabitsSearchBar";
 import DarkMode from "./DarkMode";
-
-import { UserButton, useUser } from "@clerk/nextjs";
+import { useUser, UserButton } from "@clerk/clerk-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const AllHabitsTopbar = () => {
   const { user } = useUser();
-
+  if (!user) return null;
   const userButtonAppearance = {
     elements: {
       userButtonAvatarBox: "w-10 h-10",
       userButtonPopoverActionButton: "text-red-600",
     },
   };
-  // function openSideBarFunction() {
-  //   setOpenSideBar(!openSideBar);
-  // }
-  // useEffect(() => {
-  //   function handleResize() {
-  //     setOpenSideBar(false);
-  //   }
-  //   window.addEventListener("resize", handleResize);
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
 
   return (
     <>
@@ -41,7 +29,9 @@ const AllHabitsTopbar = () => {
         <div className="w-full flex flex-col max-md:hidden">
           <span className="text-2xl ">
             <span className="font-bold">👋 Hi, There</span>
-            <span className="font-light">{`, ${user?.fullName}`}</span>
+            <span className="font-light">{`, ${
+              user?.fullName || "Guest"
+            }`}</span>
           </span>
           <span className="font-light text-[12px]  text-gray-400">
             Welcome back!
@@ -50,12 +40,6 @@ const AllHabitsTopbar = () => {
         <div className="w-[50%] max-md:w-[80%] flex gap-3 justify-between">
           <AllHabitsSearchBar />
           <DarkMode />
-          {/* <ThemeChanger /> */}
-          {/* <FontAwesomeIcon
-            onClick={openSideBarFunction}
-            icon={faBars}
-            className="m-2 max-xl:flex hidden mt-[13px] cursor-pointer"
-          /> */}
         </div>
       </div>
     </>

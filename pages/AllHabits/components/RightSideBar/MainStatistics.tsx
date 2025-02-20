@@ -106,7 +106,7 @@ const MainStatistics = () => {
     setProgress(
       calculateThePercentageOfTodaysProgress(allHabits, selectedCurrentDate)
     );
-  }, [selectedCurrentDate, allHabits, calculateThePercentageOfTodaysProgress]);
+  }, [selectedCurrentDate, allHabits]);
 
   const previousAllHabits = useRef(allHabits);
   useEffect(() => {

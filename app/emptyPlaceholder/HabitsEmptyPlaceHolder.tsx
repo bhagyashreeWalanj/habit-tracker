@@ -16,9 +16,9 @@ const HabitsEmptyPlaceHolder = () => {
         </div>
       </Skeleton>
       <span className="font-medium text-lg ">The Start of a Better Day!</span>
-      <p className="text-gray-400">
+      <span className="text-gray-400">
         Habits are like dominos. As one is formed , all others will follow.
-      </p>
+      </span>
       <span> Let&apos;s Go!!</span>
     </div>
   );

@@ -20,11 +20,17 @@ const Dashboard = () => {
   let selectComponent = null;
 
   useEffect(() => {
-    menuItems.map((singleItem) => {
-      if (singleItem.isSelected) {
-        setSelectedMenu(singleItem);
-      }
-    });
+    const fetchData = async () => {
+      // Simulate an asynchronous operation
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Update the state after the asynchronous operation is complete
+      menuItems.map((singleItem) => {
+        if (singleItem.isSelected) {
+          setSelectedMenu(singleItem);
+        }
+      });
+    };
+    fetchData();
   }, [menuItems]);
 
   switch (selectedMenu?.name) {

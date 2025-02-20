@@ -407,9 +407,9 @@ const NewHabitForm = ({
                     defaultOptions={allAreas}
                     placeholder="Select areas you like..."
                     emptyIndicator={
-                      <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
+                      <h3 className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
                         no results found.
-                      </p>
+                      </h3>
                     }
                   />
                 </div>

@@ -1,5 +1,5 @@
 "use client";
-// GlobalContextProvider.tsx
+
 import React, { useState, useEffect, useContext } from "react";
 import { createContext } from "react";
 import { GlobalContextType } from "./GlobalContextType";
@@ -94,12 +94,11 @@ function GlobalContextProvider({ children }: { children: React.ReactNode }) {
   const [offsetDay, setOffsetDay] = useState(0);
 
   useEffect(() => {
-    const fetchData = () => {
+    const fetchData = async () => {
       let allHabitData: HabitType[] = sampleHabitData;
 
-      setTimeout(() => {
-        setAllHabits(allHabitData);
-      }, 1000);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setAllHabits(allHabitData);
     };
     fetchData();
   }, []);

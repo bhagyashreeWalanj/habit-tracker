@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect } from "react";
 import { CircleArrowLeft, CircleArrowRight } from "lucide-react";
 import CreateNewHabit from "./CreateNewHabit";
