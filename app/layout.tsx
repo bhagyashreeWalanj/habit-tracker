@@ -28,11 +28,9 @@ const fontPoppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "FitTrack",
-  description: "Habit Tracker system",
-  icons: {
-    icon: "/assets/icons/logo-icon.svg",
-  },
+  title: "HabitStacker",
+  description: "Habit Tracker",
+  icons: "/assets/icons/goal.png",
 };
 
 export default function RootLayout({
@@ -41,8 +39,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning={true}>
+    <html lang="en" suppressHydrationWarning={true}>
+      <ClerkProvider>
         <GlobalContextProvider>
           <body
             className={cn(
@@ -61,7 +59,7 @@ export default function RootLayout({
             <Toaster />
           </body>
         </GlobalContextProvider>
-      </html>
-    </ClerkProvider>
+      </ClerkProvider>
+    </html>
   );
 }

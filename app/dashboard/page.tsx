@@ -57,7 +57,7 @@ const Dashboard = () => {
           <AppSidebar />
 
           {selectComponent}
-          <BlackSoftLayer />
+          {/* <BlackSoftLayer /> */}
         </SidebarProvider>
       </LocalizationProvider>
     </div>
@@ -66,14 +66,14 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-function BlackSoftLayer() {
-  const { openSideBarObject } = useGlobalContextProvider();
-  const { openSideBar } = openSideBarObject;
-  return (
-    <div
-      className={`w-full h-full bg-black fixed top-0 left-0 opacity-20 z-40 ${
-        openSideBar ? "fixed" : "hidden"
-      }`}
-    ></div>
-  );
-}
+// function BlackSoftLayer() {
+//   const { openSideBarObject } = useGlobalContextProvider();
+//   const { openSideBar } = openSideBarObject;
+//   return (
+//     <div
+//       className={`w-full h-full bg-black fixed top-0 left-0 opacity-20 z-40 ${
+//         openSideBar ? "fixed" : "hidden"
+//       }`}
+//     ></div>
+//   );
+// }
